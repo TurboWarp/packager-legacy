@@ -1,6 +1,8 @@
-# TurboWarp Packager
+# TurboWarp Packager Legacy
 
-https://packager.turbowarp.org/
+**No longer maintained. Please use the new packager instead: https://packager.turbowarp.org/**
+
+https://packager-legacy.turbowarp.org/
 
 A packager for Scratch projects.
 
