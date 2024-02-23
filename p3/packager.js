@@ -17,7 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 window.Packager = (function() {
   // @ts-ignore
-  const JSZip = window.JSZip;
+  const JSZip = window.SBDL.JSZip.default;
   // @ts-ignore
   const Icns = window.Icns;
 

@@ -368,11 +368,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
       </div>
     </footer>
 
-    <script src="lib/jszip.min.js"></script>
+    <script src="lib/sbdl.js"></script>
     <script src="lib/icns.js"></script>
     <script src="lib/details-element-polyfill.js"></script>
     <script src="conditionals.js"></script>
-    <script src="downloader.js"></script>
     <script src="parseoptions.js"></script>
     <script src="packager.js"></script>
 
@@ -430,17 +429,33 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
             if (!O.project.file) {
               throw new Error('No file selected');
             }
+            const buffer = await new Promise((resolve, reject) => {
+              const fr = new FileReader();
+              fr.onload = () => resolve(fr.result);
+              fr.onerror = () => reject(new Error('Failed to read as array buffer'));
+              fr.readAsArrayBuffer(O.project.file);
+            });
+            const project = await SBDL.downloadProjectFromBuffer(buffer);
             // File is a Blob
-            return new Packager.Project(O.project.file, await SBDownloader.identifyProjectType(O.project.file));
+            return new Packager.Project(O.project.file, project.type);
           } else if (O.project.source === 'id') {
             const projectId = getProjectId();
             if (!projectId) {
               throw new Error('No project selected');
             }
-            const project = await SBDownloader.download(projectId, {
-              progressTarget
+            const project = await SBDL.downloadProjectFromID(projectId, {
+              onProgress: (type, loaded, total) => {
+                // don't care enough to make the text update or integrate with progress target
+                // considering this was utterly broken before, this is already an upgrade
+                let text = 'Loading';
+                if (type === 'metadata') text = 'Loading metadata';
+                if (type === 'project') text = 'Loading project data';
+                if (type === 'assets') text = `Loading assets (${loaded}/${total})`;
+                if (type === 'compress') text = 'Compressing project';
+                setProgress(text, loaded / total);
+              }
             });
-            return new Packager.Project(await project.asBlob(), project.type);
+            return new Packager.Project(new Blob([project.arrayBuffer]), project.type);
           }
           throw new Error('unknown project source');
         };
