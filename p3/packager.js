@@ -56,7 +56,7 @@ window.Packager = (function() {
 
   const assetManifest = {
     'turbowarp': {
-      src: '/packager.e212db007a686ee5a5c1.js',
+      src: 'packager.e212db007a686ee5a5c1.js',
       size: 3040000 // TODO get accurate number, it's complicated because of gzip
     },
     'nwjs-win64': {
