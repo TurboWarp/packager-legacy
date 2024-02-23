@@ -24,7 +24,7 @@ const getVersion = () => {
     const dateString = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
     const packageJSON = require('./package.json');
     const version = packageJSON.version;
-    return `Standalone v${version} (${dateString})`;
+    return `Standalone Legacy (${dateString})`;
   }
   return null;
 };
