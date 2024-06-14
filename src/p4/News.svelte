@@ -23,7 +23,7 @@
   <div lang="en">
     <p>
       This is the last version of the packager before we switched licenses from the Apache 2.0 License to
-      the GNU Lesser General Public License version 3.
+      the Mozilla Public License version 2.0.
     </p>
     <p>
       This version is no longer maintained, but it will continue to exist indefinitely.
