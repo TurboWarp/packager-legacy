@@ -6,3 +6,4 @@ This branch contains the live website and prebuilt artifacts. Other branches con
 
  - `p3-scratch-gui` contains the `packager` branch of TurboWarp/scratch-gui that the `p3` directory uses.
  - `apache-packager` contains the branch of TurboWarp/packager that the `apache` directory uses.
+ - `old-compiler-packager` contains the branch of TurboWarp/packager that the `old-packager` directory uses.
